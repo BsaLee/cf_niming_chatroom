@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>匿名聊天室</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-comments"></i> 匿名聊天室</h1>
+        </header>
+        <main>
+            <div id="username-container">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="请输入用户名" required>
+                    <button id="set-username" class="btn"><i class="fas fa-sign-in-alt"></i> 进入聊天</button>
+                </div>
+                <label class="checkbox-container">
+                    <input type="checkbox" id="remember-username">
+                    <span>记住我的用户名</span>
+                </label>
+            </div>
+            <div id="chat-container" style="display: none;">
+                <div id="messages" class="message-box"></div>
+                <div class="input-group">
+                    <input type="text" id="message" placeholder="输入消息 回车发送" required>
+                    <button id="send-message" class="btn"><i class="fas fa-paper-plane"></i> 发送</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
