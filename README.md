@@ -43,9 +43,11 @@
 
 10. **访问分配的 Pages 域名**
    - 访问分配给你的 Pages 域名即可。
-**演示网站:https://chat.bhb.us.kg/**
-**演示截图**
 
 
-![演示截图](https://github.com/cd76b5b4-79b0-49fa-b06b-1428e57696cd)
+#### **演示网站:https://chat.bhb.us.kg/**
+#### **演示截图**
+#### 
+
+![演示截图](https://github.com/BsaLee/cf_niming_chatroom/blob/main/1726857751514.jpg)
 
