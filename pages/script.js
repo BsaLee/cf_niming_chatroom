@@ -121,7 +121,7 @@ function fetchMessages() {
         .then(response => response.json())
         .then(data => {
             messagesContainer.innerHTML = '';
-            data.sort((a, b) => new Date(a.timestamp) - new Date(b.timestamp)); // 按时间排序
+            data.reverse(); // 按json倒序
             data.forEach(msg => {
                 const msgElement = document.createElement('div');
                 msgElement.classList.add('message');
