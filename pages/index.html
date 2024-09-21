@@ -7,6 +7,21 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        #notice-popup {
+            position: absolute;
+            background: white;
+            border: 1px solid #ccc;
+            padding: 10px;
+            z-index: 1000;
+            width: 300px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            left: 50%;
+            transform: translateX(-50%);
+            top: 50px;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -17,18 +32,58 @@
             <div id="username-container">
                 <div class="input-group">
                     <input type="text" id="username" placeholder="请输入用户名" required>
-                    <button id="set-username" class="btn"><i class="fas fa-sign-in-alt"></i> 进入聊天</button>
+                    <div class="button-group">
+                        <button id="random-username" class="btn"><i class="fas fa-random"></i> 随机用户名</button>
+                        <button id="set-username" class="btn"><i class="fas fa-sign-in-alt"></i> 进入聊天</button>
+                    </div>
                 </div>
                 <label class="checkbox-container">
-                    <input type="checkbox" id="remember-username">
+                    <input type="checkbox" id="remember-username" checked>
                     <span>记住我的用户名</span>
                 </label>
             </div>
             <div id="chat-container" style="display: none;">
                 <div id="messages" class="message-box"></div>
                 <div class="input-group">
+                    <div class="button-group">
+                        <button id="emoji-button">😊</button>
+                        <button id="file-button">📁</button>
+                        <button id="notice-button">📰</button>
+                    </div>
                     <input type="text" id="message" placeholder="输入消息 回车发送" required>
                     <button id="send-message" class="btn"><i class="fas fa-paper-plane"></i> 发送</button>
+                </div>
+                <div id="emoji-popup" class="popup">
+                    <span class="emoji" data-emoji="😀">😀</span>
+                    <span class="emoji" data-emoji="😂">😂</span>
+                    <span class="emoji" data-emoji="😍">😍</span>
+                    <span class="emoji" data-emoji="😢">😢</span>
+                    <span class="emoji" data-emoji="😎">😎</span>
+                    <span class="emoji" data-emoji="😡">😡</span>
+                    <span class="emoji" data-emoji="😱">😱</span>
+                    <span class="emoji" data-emoji="🤔">🤔</span>
+                    <span class="emoji" data-emoji="😜">😜</span>
+                    <span class="emoji" data-emoji="🥳">🥳</span>
+                    <span class="emoji" data-emoji="🤗">🤗</span>
+                    <span class="emoji" data-emoji="🤩">🤩</span>
+                    <span class="emoji" data-emoji="🤐">🤐</span>
+                    <span class="emoji" data-emoji="😇">😇</span>
+                    <span class="emoji" data-emoji="🙃">🙃</span>
+                </div>
+                <div id="file-popup" class="popup">
+                    <input type="file" id="file-input">
+                    <div id="file-name-display"></div>
+                    <button id="upload-button" style="display: none;">上传</button>
+                </div>
+                <div id="notice-popup" class="popup" style="display: none;">
+                    <h3>提示</h3>
+                    <p>1.支持上传文件和图片</p>
+                    <p>点击📁即可发送文件or图片</p>
+                    <p>2.支持超链接和图链UBB</p>
+                    <p>超链接UBB:[url=网址]文字说明[/url]</p>
+                    <p>图链UBB:[img]图片链接[/img]</p>
+                    <p>3.对话框默认展示图片缩略图</p>
+                    <p>4.单击图片放大,再单击图片还原</p>
                 </div>
             </div>
         </main>
