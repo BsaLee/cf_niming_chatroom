@@ -22,12 +22,26 @@
             transform: translateX(-50%);
             top: 50px;
         }
+        .header-container {
+            display: flex;
+            justify-content: space-between; /* 左右排列 */
+            align-items: center; /* 垂直居中 */
+            margin-bottom: 20px; /* 标题和聊天区域的间距 */
+        }
+        .github-icon {
+            font-size: 24px;
+            color: #333;
+            text-decoration: none; /* 去掉下划线 */
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-comments"></i> 匿名聊天室</h1>
+            <div class="header-container">
+                <h1><i class="fas fa-comments"></i> 匿名聊天室</h1>
+                <a href="https://github.com/BsaLee/cf_niming_chatroom/" class="github-icon" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
         </header>
         <main>
             <div id="username-container">
