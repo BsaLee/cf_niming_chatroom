@@ -93,7 +93,7 @@ export default {
                     },
                 });
 
-                const filePath = `https://r2.bhb.us.kg/${newFileName}`;
+                const filePath = `https://cos.bhb.us.kg/${newFileName}`;
                 const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg'];
 
                 let message;
