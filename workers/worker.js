@@ -2,7 +2,7 @@ export default {
     async fetch(request, env) {
         const url = new URL(request.url);
         const DB = env.DB;
-        const R2 = env.cos; // 假设 R2 存储桶绑定为 'cos'
+        const R2 = env.cos; 
 
         if (!DB) {
             return new Response('Database not configured', { status: 500 });
@@ -18,6 +18,35 @@ export default {
                 }
             });
         }
+
+        // 违禁词库
+        const forbiddenWords = [
+            '习近平',
+            '主席',
+            '毛泽东',
+            '国家',
+            '政府',
+            '政权',
+            '反动',
+            '革命',
+            '抗议',
+            '示威',
+            '政治',
+            '腐败',
+            '特权',
+            '镇压',
+            '反对派',
+        ];
+
+        // 过滤函数
+        const filterMessage = (text) => {
+            let filteredText = text;
+            forbiddenWords.forEach(word => {
+                const regex = new RegExp(word, 'g'); // 创建正则表达式
+                filteredText = filteredText.replace(regex, '***'); // 替换违禁词为 ***
+            });
+            return filteredText;
+        };
 
         try {
             // 处理文件上传
@@ -44,7 +73,7 @@ export default {
                     },
                 });
 
-                const filePath = `https://cos.bhb.us.kg/${newFileName}`; // 生成文件路径
+                const filePath = `https://r2.bhb.us.kg/${newFileName}`; // 生成文件路径
 
                 let message;
                 const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp', 'webp', 'svg']; // 常见图片格式
@@ -56,8 +85,11 @@ export default {
                 }
 
                 // 将文件路径、用户名和时间写入数据库
+                const filteredUsername = filterMessage(username);
+                const filteredMessage = filterMessage(message);
+
                 const result = await DB.prepare('INSERT INTO messages (username, message, timestamp) VALUES (?, ?, ?)')
-                    .bind(username, message, new Date(timestamp).toISOString())
+                    .bind(filteredUsername, filteredMessage, new Date(timestamp).toISOString())
                     .run();
 
                 console.log('File Uploaded and Message Inserted:', result);
@@ -74,8 +106,11 @@ export default {
 
                 console.log('Received POST Data:', { username, message, timestamp });
 
+                const filteredUsername = filterMessage(username);
+                const filteredMessage = filterMessage(message);
+
                 const result = await DB.prepare('INSERT INTO messages (username, message, timestamp) VALUES (?, ?, ?)')
-                    .bind(username, message, timestamp)
+                    .bind(filteredUsername, filteredMessage, timestamp)
                     .run();
 
                 console.log('Insert Result:', result);
@@ -94,8 +129,9 @@ export default {
                 });
             } else if (request.method === 'POST' && url.pathname === '/api/name') {
                 const { username, latitude, longitude, ipAddress, timestamp } = await request.json();
+                const filteredUsername = filterMessage(username);
                 const result = await DB.prepare('INSERT INTO user_info (username, latitude, longitude, ipAddress, timestamp) VALUES (?, ?, ?, ?, ?)')
-                    .bind(username, latitude, longitude, ipAddress, timestamp)
+                    .bind(filteredUsername, latitude, longitude, ipAddress, timestamp)
                     .run();
 
                 return new Response('User info saved', {
