@@ -217,7 +217,7 @@ function sendMessage() {
     const message = messageInput.value;
     if (message) {
         const timestamp = new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" });
-        fetch('https://api.bhb.us.kg/api/messages', {
+        fetch('https://api.bhb.us.kg/api/sendMessage', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -246,8 +246,17 @@ function fetchMessages() {
             data.reverse(); // 按json倒序
             data.forEach(msg => {
                 const msgElement = document.createElement('div');
-                msgElement.classList.add('message');
+                msgElement.classList.add('msg-box');
                 msgElement.classList.add(msg.username === username ? 'self' : 'other');
+
+                // 创建用户名元素
+                const usernameElement = document.createElement('div');
+                usernameElement.classList.add('username');
+                usernameElement.textContent = msg.username;
+
+                // 创建消息内容元素
+                const contentElement = document.createElement('div');
+                contentElement.classList.add('message');
 
                 // 解析消息内容
                 let messageContent = msg.message;
@@ -265,7 +274,11 @@ function fetchMessages() {
                     }
                 }
 
-                msgElement.innerHTML = `<strong>${msg.username}</strong>: ${messageContent} <span class="timestamp">${msg.timestamp}</span>`;
+                contentElement.innerHTML = `${messageContent} <span class="timestamp">${msg.timestamp}</span>`;
+
+                // 将用户名和消息内容添加到消息元素中
+                msgElement.appendChild(usernameElement);
+                msgElement.appendChild(contentElement);
                 messagesContainer.appendChild(msgElement);
             });
 

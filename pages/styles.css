@@ -15,7 +15,11 @@ body {
     flex-direction: column;
     justify-content: flex-start; /* 上边对齐 */
     width: 100%;
-    max-width: 400px;
+    max-width: 100vh;
+    min-height: calc(100vh - 100px);
+
+
+
     padding: 20px; /* 减少内边距 */
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
@@ -48,18 +52,24 @@ header h1 {
 }
 
 .button-group button {
+    width: 30%;
+    border-radius: 5px;
+    border: 0;
+    box-shadow: 0 0 5px rgba(19, 18, 18, 0.5);
     font-size: 16px;
     padding: 10px;
-    width: 48%;
     cursor: pointer;
 }
 
 input[type="text"] {
+    box-sizing: border-box;
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 5px rgba(19, 18, 18, 0.15);
 }
 
 .btn {
@@ -79,7 +89,9 @@ input[type="text"] {
 }
 
 .message-box {
-    max-height: 300px;
+    min-height: calc(100vh - 300px);
+    max-height: calc(100vh - 300px);
+    /* max-height: 300px; */
     overflow-y: auto;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -88,20 +100,32 @@ input[type="text"] {
     background-color: #f1f1f1;
 }
 
-.message {
+.msg-box {
     margin: 10px 0;
-    padding: 10px;
-    border-radius: 15px;
+    display: table;
+    width: auto;
     max-width: 70%;
     word-wrap: break-word;
 }
 
-.message.self {
-    background-color: #d1e7dd;
-    margin-left: auto;
+.message {
+    padding: 10px;
+    margin-top: 5px;
+    border-radius: 15px;
 }
 
-.message.other {
+.msg-box.self .username {
+    text-align: right;
+}
+
+.msg-box.self {
+    margin-left: auto;
+}
+.msg-box.self .message{
+    background-color: #d1e7dd;
+}
+
+.msg-box.other .message{
     background-color: #f8d7da;
 }
 
@@ -211,9 +235,11 @@ input[type="text"] {
     .container {
         width: 100%;
         padding: 20px;
+        border-radius: 0;
+        height: calc(100vh - 40px);
     }
 
-    .button-group button {
+    /* .button-group button {
         width: 30%;
-    }
+    } */
 }
